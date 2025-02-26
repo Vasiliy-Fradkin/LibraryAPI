@@ -49,12 +49,11 @@ namespace Library.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBookById(int id)
+        public async Task<IActionResult> GetBookById([FromQuery]GetBookByIdQuery request)
         {
-            var query = new GetBookByIdQuery { Id = id};
-            var bookDto = await _mediator.Send(query);
+            var bookDto = await _mediator.Send(request);
             if (bookDto == null)
-                return NotFound($" нига с id={id} не найдена.");
+                return NotFound($" нига с id={request.Id} не найдена.");
             return Ok(bookDto);
         }
 
@@ -67,6 +66,18 @@ namespace Library.API.Controllers
             if (bookDto == null)
                 return NotFound();
             return Ok(bookDto);
+        }
+
+        [HttpGet("search")]
+        public async Task<IEnumerable<SearchByFieldDto>> SearchByField([FromQuery] SearchByFieldQuery request)
+        {   
+            return await _mediator.Send(request); 
+        }
+
+        [HttpGet("sort")]
+        public async Task<IEnumerable<SortedBooksDto>> SortedBooks([FromQuery]  SortedBooksQuery request)
+        {
+            return await _mediator.Send(request);
         }
     }
 }

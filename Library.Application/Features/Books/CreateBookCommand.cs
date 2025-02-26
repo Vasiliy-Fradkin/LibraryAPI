@@ -1,7 +1,6 @@
 ﻿using Library.Domain.Interfaces;
 using Library.Domain.Entities;
 using MediatR;
-using FluentValidation;
 using Library.Application.DTO;
 
 namespace Library.Application.Features.Books
@@ -47,17 +46,4 @@ namespace Library.Application.Features.Books
             return book.Id;
         }
     }
-
-    public class CreateBookCommandValidator : AbstractValidator<CreateBookCommand>
-    {
-        public CreateBookCommandValidator()
-        {
-            RuleFor(x => x.Title).NotEmpty().WithMessage("Title is required");
-            RuleFor(x => x.Author).NotEmpty().WithMessage("Author is required");
-            RuleFor(x => x.Year).InclusiveBetween(1000, DateTime.UtcNow.Year)
-                .WithMessage($"Year must be between 1000 and {DateTime.UtcNow.Year}");
-            RuleFor(x => x.ShelfName).NotEmpty().WithMessage("ShelfName is required");
-        }
-    }
-
 }

@@ -1,5 +1,4 @@
 ﻿using Library.Domain.Interfaces;
-using Library.Domain.Entities;
 using MediatR;
 using FluentValidation;
 using Library.Application.DTO;
@@ -8,7 +7,7 @@ namespace Library.Application.Features.Books
 {
     public class GetBookByIdQuery : IRequest<GetBookByIdDto>
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
     }
     public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, GetBookByIdDto>
