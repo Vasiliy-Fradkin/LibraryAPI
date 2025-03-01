@@ -1,6 +1,4 @@
-﻿using Library.Domain.Interfaces;
-using Library.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 using Library.Application.Dto;
 
 namespace Library.Application.Features.Books.Commands.CreateBook

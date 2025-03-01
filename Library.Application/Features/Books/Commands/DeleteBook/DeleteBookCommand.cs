@@ -1,6 +1,4 @@
-﻿using Library.Domain.Interfaces;
-using MediatR;
-using System.ComponentModel.DataAnnotations;
+﻿using MediatR;
 
 namespace Library.Application.Features.Books.Commands.DeleteBook
 {

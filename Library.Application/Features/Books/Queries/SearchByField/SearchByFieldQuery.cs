@@ -1,5 +1,4 @@
 ﻿using Library.Application.Dto;
-using Library.Domain.Interfaces;
 using MediatR;
 
 namespace Library.Application.Features.Books.Queries.SearchByField
