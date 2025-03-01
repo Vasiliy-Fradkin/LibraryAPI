@@ -1,6 +1,11 @@
 using Library.Application.Dto;
-using Library.Application.DTO;
-using Library.Application.Features.Books;
+using Library.Application.Features.Books.Commands.CreateBook;
+using Library.Application.Features.Books.Commands.DeleteBook;
+using Library.Application.Features.Books.Commands.UpdateBook;
+using Library.Application.Features.Books.Queries.GetAllBooks;
+using Library.Application.Features.Books.Queries.GetBookById;
+using Library.Application.Features.Books.Queries.SearchByField;
+using Library.Application.Features.Books.Queries.SortedBooks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +33,7 @@ namespace Library.API.Controllers
             return CreatedAtAction(nameof(GetBookById), new { id = bookId }, new { id = bookId });
         }
 
-        [HttpPost("update/{id}")]
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateBook(int id, [FromBody] UpdateBookDto dto)
         {
             if (dto == null)
@@ -39,7 +44,7 @@ namespace Library.API.Controllers
             return Ok(updatedbook);
         }
 
-        [HttpPost("delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
 
@@ -49,8 +54,9 @@ namespace Library.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBookById([FromQuery]GetBookByIdQuery request)
+        public async Task<IActionResult> GetBookById(int id)
         {
+            var request = new GetBookByIdQuery { Id = id };
             var bookDto = await _mediator.Send(request);
             if (bookDto == null)
                 return NotFound($" нига с id={request.Id} не найдена.");

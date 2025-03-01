@@ -1,19 +1,18 @@
-﻿using Library.Domain.Interfaces;
+﻿using Library.Application.DTO;
+using Library.Domain.Interfaces;
 using MediatR;
-using FluentValidation;
-using Library.Application.DTO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Library.Application.Features.Books
+namespace Library.Application.Features.Books.Queries.GetBookById
 {
-    public class GetBookByIdQuery : IRequest<GetBookByIdDto>
-    {
-        public int Id { get; }
-
-    }
-    public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, GetBookByIdDto>
+    public class GetBookByIdHandler : IRequestHandler<GetBookByIdQuery, GetBookByIdDto>
     {
         private readonly IBookRepository _repository;
-        public GetBookByIdQueryHandler(IBookRepository repository)
+        public GetBookByIdHandler(IBookRepository repository)
         {
             _repository = repository;
         }
@@ -23,7 +22,7 @@ namespace Library.Application.Features.Books
             if (book == null) return null;
             var dto = new GetBookByIdDto
             {
-                
+
                 Title = book.Title,
                 Author = book.Author,
                 Year = book.Year,
@@ -31,11 +30,8 @@ namespace Library.Application.Features.Books
                 ShelfName = book.ShelfName,
                 DateAdded = book.DateAdded
             };
-            
+
             return dto;
         }
     }
-
-    
-
 }

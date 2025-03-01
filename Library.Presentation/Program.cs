@@ -1,8 +1,9 @@
-using Library.Application.Features.Books;
+using Library.Application.Features.Books.Commands.CreateBook;
 using Library.Domain.Interfaces;
 using Library.Infrastructure.Data;
 using Library.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddDbContext<LibraryDbContext>(options =>
 // Подключаем зависимости
 builder.Services.AddScoped<IBookRepository, BookRepository>(); // Репозиторий
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateBookCommand).Assembly));
+
+
+builder.Services.AddValidatorsFromAssembly(typeof(CreateBookCommand).Assembly);
 
 
 // Добавляем контроллеры и Swagger

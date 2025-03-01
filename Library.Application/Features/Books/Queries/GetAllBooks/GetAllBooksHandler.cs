@@ -1,17 +1,18 @@
-﻿using MediatR;
-using Library.Application.Dto;
+﻿using Library.Application.Dto;
 using Library.Domain.Interfaces;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Library.Application.Features.Books
+namespace Library.Application.Features.Books.Queries.GetAllBooks
 {
-    public class GetAllBooksQuery : IRequest<IEnumerable<GetAllBooksDto>>
-    {
-    }
-
-    public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, IEnumerable<GetAllBooksDto>>
+    public class GetAllBooksHandler : IRequestHandler<GetAllBooksQuery, IEnumerable<GetAllBooksDto>>
     {
         private readonly IBookRepository _repository;
-        public GetAllBooksQueryHandler(IBookRepository repository)
+        public GetAllBooksHandler(IBookRepository repository)
         {
             _repository = repository;
         }

@@ -1,16 +1,14 @@
 ﻿using Library.Application.Dto;
 using Library.Domain.Interfaces;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Library.Application.Features.Books
+namespace Library.Application.Features.Books.Queries.SearchByField
 {
-    public class SearchByFieldQuery : IRequest<IEnumerable<SearchByFieldDto>>
-    {
-        public string? Title { get; }
-        public string? Author { get; }
-        public int? Year { get; }
-    };
-
     public class SearchByFieldHandler : IRequestHandler<SearchByFieldQuery, IEnumerable<SearchByFieldDto>>
     {
         private readonly IBookRepository _repository;
@@ -34,8 +32,5 @@ namespace Library.Application.Features.Books
             });
             return result;
         }
-
-
     }
 }
-
